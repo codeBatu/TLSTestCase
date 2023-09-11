@@ -11,7 +11,8 @@ namespace Repository.RepositoryInterface
     public interface IAccountRepository : IGenericRepository<Users, int>
     {
         Task<IDataResult<int>> Register(Users account);
-        public Task<Users> getUserByEmailAndPassword(Users users);
+        public Task<Users> getUserByUserNameAndPassword(Users users);
+        public Task<Users> getUserByUserName(string username);
 
 
     }

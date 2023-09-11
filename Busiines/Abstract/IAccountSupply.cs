@@ -11,7 +11,8 @@ namespace Busiines.Abstract
 {
     public interface IAccountSupply
     {
-        IDataResult<AuthenticateResponse> Authenticate(AuthenticateRequest model);
+       
+       public Task< IDataResult<AuthenticateResponse>> Authenticate(AuthenticateRequest model);
         public Task<Users> Authenticate(Users model);
     }
 }

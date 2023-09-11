@@ -20,7 +20,9 @@ namespace Repository
             _context = context;
         }
    
-        public async Task<Users> getUserByEmailAndPassword (Users users)
+        // Useri username ve password gore getirir
+
+        public async Task<Users> getUserByUserNameAndPassword (Users users)
         {
             var user = await _context.Users.Where(x => x.Username == users.Username && x.Password == users .Password).FirstOrDefaultAsync();
             if (user == null)
@@ -32,7 +34,20 @@ namespace Repository
            
         
         }
-    
+        // Useri username gore getirir
+        public async Task<Users> getUserByUserName(string username)
+        {
+            var user = await _context.Users.Where(x => x.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user;
+
+
+        }
+
 
         public Task<IDataResult<int>> Register(Users account)
         {

@@ -18,29 +18,35 @@ namespace Repository
         {
             this.dbContext = dbContext;
         }
+        // Documenti id ye gore getirir
         public Document GetById(int id)
         {
             return dbContext.Documents.FirstOrDefault(doc => doc.ID == id);
         }
+        // Tum documentleri getirir
 
         public IEnumerable<Document> GetAll()
         {
             return dbContext.Documents.ToList();
         }
 
+        // Userin id sine gore documentleri getirir
         public IEnumerable<Document> GetAllByUserId(int id)
         {
             return dbContext.Documents.ToList().Where(x=>x.UserID==id) == null ? new List<Document> () : dbContext.Documents.ToList().Where(x => x.UserID == id);
         }
+        // Documenti id ye gore getirir
 
         public IEnumerable<Document> Find(Func<Document, bool> predicate)
         {
             return dbContext.Documents.Where(predicate).ToList();
         }
 
+        // Documenti ekler
         public void Add(Document document)
         {
             dbContext.Documents.Add(document);
+            
             dbContext.SaveChanges();
         }
     }

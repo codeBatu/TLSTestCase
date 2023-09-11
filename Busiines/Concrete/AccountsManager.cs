@@ -16,25 +16,33 @@ namespace Busiines.Concrete
     public class AccountManager : IAccountSupply
     {
         private readonly IAccountRepository _accountDal;
-      
+        private readonly IMapper _mapper;
 
-        public AccountManager(IAccountRepository accountDal)
+        public AccountManager(IAccountRepository accountDal, IMapper mapper)
         {
             _accountDal = accountDal;
-          
+            _mapper = mapper;
         }
 
         public async Task<Users> Authenticate(Users model)
         {
-        var user =  await _accountDal.getUserByEmailAndPassword(model);
+        var user =  await _accountDal.getUserByUserNameAndPassword(model);
 
             return user;
         }
 
-        public IDataResult<AuthenticateResponse> Authenticate(AuthenticateRequest model)
+        public async Task< IDataResult<AuthenticateResponse>> Authenticate(AuthenticateRequest model)
         {
-            throw new NotImplementedException();
+            var account = await _accountDal.getUserByUserName(model.UserName);
+            if (account == null )
+                return null;
+            if (account.Password != model.Password)
+                return null;
+            var response = _mapper.Map<AuthenticateResponse>(account);
+            return new Model.Result.DataResult<AuthenticateResponse>(response, true, "Login Successful");
         }
+
+     
     }
 
 }

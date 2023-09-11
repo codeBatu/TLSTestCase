@@ -10,8 +10,8 @@ namespace Model.DTO.Account
     public class AuthenticateRequest
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+     
+        public string UserName { get; set; }
 
         [Required]
         public string Password { get; set; }

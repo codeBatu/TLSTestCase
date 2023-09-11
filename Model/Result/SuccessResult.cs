@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.Results;
+namespace Model.Result
+{
 
-public class SuccessResult : Result
+    public class SuccessResult : Result
 {
     public SuccessResult(string message) : base(true, message)
     {
@@ -17,4 +18,5 @@ public class SuccessResult : Result
     {
 
     }
+}
 }

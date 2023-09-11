@@ -18,14 +18,32 @@ namespace Api.Controllers
         {
             _accountManager = accountManager;
         }
+        // GET: api/Account
+        //  Userlari login yapar
+
+  
 
         [AllowAnonymous]
-        [HttpPost("authenticate")]
-        public async Task<ActionResult<Users>> Authenticate(Users model)
+        [HttpPost("user/authenticate")]
+        public async Task<ActionResult<AuthenticateResponse>> Authenticate(AuthenticateRequest model)
         {
-            var user = await _accountManager.Authenticate(model);
-         
-            return Ok(user);
+            if (string.IsNullOrEmpty(model.UserName) || string.IsNullOrEmpty(model.Password))
+            {
+                return BadRequest("Kullanıcı adı ve şifre gereklidir.");
+            }
+
+            var result = await _accountManager.Authenticate(model);
+            if(result == null)
+            {
+                return BadRequest("Kullanıcı adı veya şifre hatalı.");
+            }
+            if (!result.Success)
+            {
+                return BadRequest(result.Message);
+            }
+
+            return Ok(result.Data);
         }
+
     }
 }

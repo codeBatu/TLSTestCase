@@ -12,8 +12,9 @@ namespace Busiines.Abstract
     {
         Document GetById(int id);
         IEnumerable<Document> GetAll();
+        IEnumerable<Document> GetAllById(int UserId);
         IEnumerable<Document> Find(Func<Document, bool> predicate);
-        void Add(Document entity);
+        void Add(DocumentDTO entity);
 
 
     }

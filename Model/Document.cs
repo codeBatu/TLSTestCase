@@ -13,7 +13,7 @@ namespace Model
         public string? FileName { get; set; }
         public string? FileType { get; set; }
         public string? FilePath { get; set; }
-        public DateTime? CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }= DateTime.Now;
         public string? Title { get; set; }
         public string? Description { get; set; }
         public virtual Users User { get; set; } = null!;
